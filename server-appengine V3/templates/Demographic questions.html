@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+        <style>
+            body {background-color:#EAE7DC;}
+            h1 {text-align: center; font-family: Sans-serif;}
+            h2 {text-align: center; font-family: Sans-serif;}
+            h3 {text-align: center; font-family: Sans-serif; color: #8E8D8A;}
+            p.selectorsText {text-align: center; font-family: Sans-serif;}
+            p.themeText {font-family: Sans-serif; color: #8E8D8A;}
+            form {text-align: center;}
+            input[type='checkbox']{
+                transform: scale(1.5);
+                margin-bottom: 15px;
+                }
+        </style>
+        <script>
+            function getAnswers(){
+                var gender = document.getElementById("genderSelector");
+                var age = document.getElementById("ageSelector");
+                var parti = document.getElementById("partiSelector");
+                if(parti.value == "parti not chossen"){
+                    alert('Hov, du har glemt at vælge det parti som du stemte på ved sidste valg')
+                    return false
+                }else if (age.value == "age not chossen") {
+                    alert('Hov, du har glemt at fortælle din alder')
+                    return false
+                }else if (gender.value == "gender not chossen") {
+                    alert('Hov, du mangler at udfylde køn')
+                    return false
+                }else {
+                    return true
+                }
+            }
+        </script>
+  <body>
+    <br>
+    <br>
+      <p class="SelectorsText">
+        <b> Nu vil vi gerne høre lidt om dig. Når du er færdig skal du trykke på send svar. </b> 
+      </p>
+      <hr>
+      <form onsubmit="return getAnswers()" action = "/thankyou" method="post">
+        <input type="hidden" name="session_id" value="{{ sessionID }}">
+        <div>
+            <p class="selectorsText">Køn</p>
+            <select name = "gender" id="genderSelector">
+                <option value="gender not chossen">--- Vælg køn ---</option>
+                <option value="female">Kvinde</option>
+                <option value="male">Mand</option>
+                <option value="non-binary">Nonbinær</option>
+            </select>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div>
+            <p class="selectorsText">Alder</p>
+            <select name = "age" id="ageSelector">
+                <option value="age not chossen">--- Vælg alder ---</option>
+                
+                {% for age in ages %}
+                <option value="{{age}}">{{age}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div>
+            <p class="selectorsText">Hvad stemte du ved sidste valg?</p>
+            <select name = "parti" id="partiSelector">
+                <option value="parti not chossen">--- Vælg parti ---</option>
+                
+                {% for parti in partier %}
+                <option value="{{parti}}">{{parti}}</option>
+                {% endfor %}
+
+                <option value="Jeg stemte ikke">Jeg stemte ikke</option>
+            </select>
+        </div> 
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg" style = "font-size:16px">Send svar</button>
+        <br>
+        <br>
+        <br>
+      <div>
+  </body>
+</html>

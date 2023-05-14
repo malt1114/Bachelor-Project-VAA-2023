@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <style>
+            body {background-color:#EAE7DC;}
+            label {font-family: Sans-serif; }
+            div {text-align: center;}
+            h1 {text-align: center; font-family: Sans-serif;}
+            h2 {text-align: center; font-family: Sans-serif;}
+            h3 {text-align: center; font-family: Sans-serif;}
+            p.selectorsText {text-align: center; font-family: Sans-serif;}
+            p.themeText {font-family: Sans-serif; text-align: center; font-weight:bold; color: #8E8D8A;}
+            form {text-align: center;}
+            
+            .checkboxgroup {
+                display: inline-block;
+                text-align: center;
+                }
+            .checkboxgroup label {
+                display: block;
+                align-items: center;
+                margin: 0 10px 0 10px;
+                }
+            input[type='radio']{
+                transform: scale(1.5);
+                margin-bottom: 15px;
+                }
+            
+            
+        </style>
+        <script>
+            function getAnswers() {
+                var allQuestionsAnswered = true;
+                //Get all the questions
+                var questionDivs = document.querySelectorAll('form div[id^="Distance"]');
+                let temp = "Hov, du mangler at svare på: ";
+
+                //Loop through all the questions
+                for (var i = 0; i < questionDivs.length; i++) {
+                    //Get boxes of the question
+                    var radios = questionDivs[i].querySelectorAll('input[type="radio"]');
+                    var oneRadioChecked = false;
+                    
+                    //Check each of the boxes
+                    for (var j = 0; j < radios.length; j++) {
+                        //Check if button is checked
+                        if (radios[j].checked) {
+                            oneRadioChecked = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!oneRadioChecked) {
+                        allQuestionsAnswered = false;
+                        }
+
+                }
+                //If one question is not Answered, tell user to Answer all the questions
+                if (!allQuestionsAnswered) {
+                    alert("Hov, du skal svare på alle spørgsmål");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+  <body>
+      <br>
+      <br>
+    <p class="selectorsText">
+    <b>
+    Vi har fire modeller som udregner, hvilke partier du er mest enig med. <br>
+    Du skal svare på, om du kunne finde på at stemme på det pågældende, på en skala fra 1-7; <br> 
+    1 er “det parti vil jeg ikke stemme på”, 4 er neutralt og 7 er “det parti jeg vil stemme på”. <br>
+    Du skal være opmærksom på, at et parti kan optræde flere gange. Dette er tilfældet hvis flere af modellerne er enige. <br>
+    Når du er færdig skal du trykke næste. 
+    </b>
+    </p>
+    <hr>
+    <form onsubmit="return getAnswers()" action = "/demo" method="post">
+        <input type="hidden" name="session_id" value="{{ sessionID }}">
+      <br>
+        </div>
+        {% for dist, match in Matches %}
+          <br>
+          <div id="Distance">
+              <h3>{{match}}</h3>
+                <div class="checkboxgroup"><input type="radio" id="Q{{dist}}1" name="{{dist}}" value="1" ><label for="1">1</label></div>
+                <div class="checkboxgroup"><input type="radio" id="Q{{dist}}2" name="{{dist}}" value="2" ><label for="2">2</label></div>
+                <div class="checkboxgroup"><input type="radio" id="Q{{dist}}3" name="{{dist}}" value="3" ><label for="3">3</label></div>
+                <div class="checkboxgroup"><input type="radio" id="Q{{dist}}4" name="{{dist}}" value="4" ><label for="4">4</label></div>
+                <div class="checkboxgroup"><input type="radio" id="Q{{dist}}5" name="{{dist}}" value="5" ><label for="5">5</label></div>
+                <div class="checkboxgroup"><input type="radio" id="Q{{dist}}6" name="{{dist}}" value="6" ><label for="6">6</label></div>
+                <div class="checkboxgroup"><input type="radio" id="Q{{dist}}7" name="{{dist}}" value="7" ><label for="7">7</label></div>
+            </div> 
+          <br>
+          <hr>
+            {% endfor %}
+        </div>
+        <br>
+        <br>
+          <button type="submit" class="btn btn-primary btn-lg" style = "font-size:16px">Næste</button>
+          </form>
+
+  </body>
+</html>

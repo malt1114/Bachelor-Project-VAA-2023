@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <style>
+            body {background-color:#EAE7DC;}
+            label {font-family: Sans-serif; }
+            div {text-align: center;}
+            h1 {text-align: center; font-family: Sans-serif;}
+            h2 {text-align: center; font-family: Sans-serif;}
+            h3 {text-align: center; font-family: Sans-serif;}
+            p.selectorsText {text-align: center; font-family: Sans-serif;}
+            p.themeText {text-align: center; font-weight: bold;   font-family: Sans-serif; color: #8E8D8A;}
+            form {text-align: center;}
+            button {text-align: center;}
+            .checkboxgroup {
+                display: inline-block;
+                text-align: center;
+                }
+            .checkboxgroup label {
+                display: block;
+                margin: 0 10px 0 10px;
+                }
+            .form-radio-item input {
+                height: 20px !important;
+                width: 20px !important;
+                }
+            input[type='radio']{
+                transform: scale(1.5);
+                margin-bottom: 15px;
+                }
+            
+        </style>
+        <script>
+            function validateForm() {
+                //Check if valgkreds is chossen
+                //var valgkreds = document.getElementById("valgkredseSelector");
+                //var parti = document.getElementById("partiSelector");
+                //if (parti.value == "parti not chossen"){
+                //        alert("Hov, du har ikke valgt det parti som du stemte på i 2022")
+                //        return false
+                //} else if (valgkreds.value == "Valgkreds not chossen"){
+                //        alert("Hov, du har ikke valgt en valgkreds")
+                //        return false
+                //} else {
+                var allQuestionsAnswered = true;
+                //Get all the questions
+                var questionDivs = document.querySelectorAll('form div[id^="Q"]');
+                let temp = "Hov, du mangler at svare på: ";
+
+                //Loop through all the questions
+                for (var i = 0; i < questionDivs.length; i++) {
+                    //Get boxes of the question
+                    var radios = questionDivs[i].querySelectorAll('input[type="radio"]');
+                    var oneRadioChecked = false;
+                    
+                    //Check each of the boxes
+                    for (var j = 0; j < radios.length; j++) {
+                        //Check if button is checked
+                        if (radios[j].checked) {
+                            oneRadioChecked = true;
+                            break;
+                        }
+                    }
+                    //If no button is checked, add question to message
+                    if (!oneRadioChecked) {
+                    allQuestionsAnswered = false;
+                    qNum = i +1
+                    temp += qNum.toString() + ", ";
+                    }
+                }
+                //If one question is not Answered, tell user to Answer the specific questions
+                if (!allQuestionsAnswered) {
+                    alert(temp);
+                    return false;
+                }
+                return true;
+                //}
+            }
+
+            function getAnswers(){
+                if(validateForm()){
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+        </script>
+    </head>
+    <br>
+    <br>
+    <p class="selectorsText"><b>Her under er der 25 politiske udsagn, som du skal besvare på en skala fra uenig til enig. <br> 
+        Når du er færdig skal du trykke næste.</b></p>   
+    <hr> 
+    <body>
+        <!Makes sure that all questions are answered before submitting, also preventing refresh if missing answer>
+        <form onsubmit="return getAnswers()" action = "/matches" method="post">
+            <input type="hidden" name="session_id" value="{{ sessionID }}">
+          <br>
+            </div>
+              {% for count, idnum, theme, que in questions %}
+              <br>
+              <div id="Q{{count}}">
+                  <h4>Spørgsmål {{count}} ud af 25</h3>
+                  <p class="themeText">{{theme}}</p>
+                  <h3>{{que}}</h2>
+                    <div class="checkboxgroup">
+                        <input type="radio" id="Q{{idnum}}4" name="Q{{count}} Answer" value="Uenig" >
+                        <label for="Uenig">Uenig</label>
+                    </div>
+                    <div class="checkboxgroup">
+                        <input type="radio" id="Q{{idnum}}3" name="Q{{count}} Answer" value="Lidt uenig" >
+                        <label for="Lidt uenig">Lidt uenig</label>
+                    </div>
+                    <div class="checkboxgroup">
+                        <input type="radio" id="Q{{idnum}}2" name="Q{{count}} Answer" value="Lidt enig" >
+                        <label for="Lidt enig">Lidt enig</label>
+                    </div>
+                    <div class="checkboxgroup">
+                        <input type="radio" id="Q{{idnum}}1" name="Q{{count}} Answer" value="Enig" >
+                        <label for="Enig">Enig</label>
+                    </div>
+                </div> 
+              <br>
+              <hr>
+                {% endfor %}
+                <br>
+                <br>
+              <button type="submit" class="btn btn-primary btn-lg" style = "font-size:16px">Næste</button>
+            </form>
+              <br>
+              <br>
+              </div>
+    </body>
+</html>

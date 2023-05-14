@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+        <style>
+            body {background-color:#EAE7DC;}
+            h1 {text-align: center; font-family: Sans-serif;}
+            p {text-align: center; font-family: Sans-serif;}
+            p.selectorsText {text-align: center; font-family: Sans-serif;}
+            p.themeText {text-align: center; font-weight: bold;   font-family: Sans-serif; color: #8E8D8A;}
+            p.credit {text-align: center; font-family: Sans-serif; color: #8E8D8A; font-size: small;}
+            form {text-align: center;}
+            label {font-family: Sans-serif;} 
+            .checkboxgroup {
+                display: inline-block;
+                text-align: center;
+                }
+            .checkboxgroup label {
+                display: block;
+                align-items: center;
+                margin: 0 10px 0 10px;
+                }   
+            input[type='checkbox']{
+                transform: scale(1.5);
+                margin-bottom: 15px;
+                }
+        </style>
+        
+        <script>
+            function checkConsent(){
+                var consentBoxValue = document.getElementById("consentBox")
+                if(consentBoxValue.checked == true){
+                    return true
+                }
+                else {
+                    alert("Hov, du skal godkende at vi må insamle dine svar")
+                    return false
+                }
+            }
+        </script>
+  <body>
+        <h1>Kandidattest</h1>
+        <br>
+        <p class=themeText>Hvad er det?</p>
+        <p>Dette spørgeskema er en kandidattest, 
+            som vil forsøge, at finde det parti 
+            som du er mest enig med ud fra 25 politiske udsagn.  
+            <br> Spørgsmålene er fra DR’s kandidattest 
+            som er blevet lavet i sammenarbejde med Altinget. <br>
+            Dine svar vil blive brugt til vores bachelor projekt 
+            der omhandler, hvordan en kandidattest udregner, <br>
+            hvilket parti man er mest enige med.
+        </p>
+        <br>
+        <p class=themeText>Hvilke data indsamler I?</p>
+        <p>
+            Når du udfylder testen indsamler vi dine testsvar for at 
+            beregne det bedst mulige politiske match til dig. <br>
+            Derudover, beder vi dig om at svare på nogle simple spørgsmål
+             om dig selv af statistiske årsager. <br> Alle besvarelser forbliver anonyme, 
+             og gemmes udelukkende grundet læringsmål <br> ifm udarbejdelse af vores 
+             bachelorprojekt på IT Universitetet. 
+        </p>
+        <br>
+        <p class=themeText>Hvad skal jeg gøre?</p>
+        <p>Du skal være over 18 år og svare på alle spørgsmålene. </p>
+        <br>
+
+        <form onsubmit="return checkConsent()" action = "/vaa" method="post">
+            <input type="hidden" name="session_id" value="{{ sessionID }}">
+            <div>
+            <div class = checkboxgroup>
+                <input type = "checkbox" id="consentBox" name="consent" value="Given">
+                <label for="consent"> Acceptere</label><br>
+            </div>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg" style = "font-size:16px">Næste</button>
+            <br>
+            <br>
+            </div>
+        </form>
+        <br>
+        <p class="credit">Lavet af: <br>
+        Nicola Clark, niccl@itu.dk, IT-Universitetet København <br>
+        Malthe R. P. Lauridsen, mrla@itu.dk, IT-Universitetet København</p>
+  </body>
+</html>
