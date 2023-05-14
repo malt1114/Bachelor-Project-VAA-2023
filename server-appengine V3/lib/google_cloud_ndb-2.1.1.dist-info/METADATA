@@ -1,0 +1,74 @@
+Metadata-Version: 2.1
+Name: google-cloud-ndb
+Version: 2.1.1
+Summary: NDB library for Google Cloud Datastore
+Home-page: https://github.com/googleapis/python-ndb
+Author: Google LLC
+Author-email: googleapis-packages@google.com
+License: Apache 2.0
+Project-URL: Documentation, https://googleapis.dev/python/python-ndb/latest
+Project-URL: Issue Tracker, https://github.com/googleapis/python-ndb/issues
+Platform: Posix; MacOS X; Windows
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Internet
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+License-File: AUTHORS
+Requires-Dist: google-api-core[grpc] (!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.0)
+Requires-Dist: google-cloud-datastore (<3.0.0dev,>=2.7.2)
+Requires-Dist: protobuf (!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev,>=3.19.5)
+Requires-Dist: pymemcache (<5.0.0dev,>=2.1.0)
+Requires-Dist: redis (<5.0.0dev,>=3.0.0)
+Requires-Dist: pytz (>=2018.3)
+
+# Google Cloud Datastore `ndb` Client Library
+
+## Introduction
+
+This is an updated version of the `ndb` client library for use with
+[Google Cloud Datastore][0].
+
+* [Client Library Documentation](https://googleapis.dev/python/python-ndb/latest)
+
+The original Python 2 version of `ndb` was designed specifically for the
+[Google App Engine][1] `python27` runtime and can be found at
+https://github.com/GoogleCloudPlatform/datastore-ndb-python. This version of
+`ndb` is designed for the [Google App Engine Python 3 runtime][2], and will
+run on other Python platforms as well.
+
+[0]: https://cloud.google.com/datastore
+[1]: https://cloud.google.com/appengine
+[2]: https://cloud.google.com/appengine/docs/standard/python3/
+
+## Release Status
+
+GA
+
+## Supported Python Versions
+
+Our client libraries are compatible with all current [active][3] and [maintenance][4] versions of Python.
+
+Python >= 3.7
+
+[3]: https://devguide.python.org/devcycle/#in-development-main-branch
+[4]: https://devguide.python.org/devcycle/#maintenance-branches
+
+### Unsupported Python Versions
+
+Python <= 3.6
+
+If you are using an [end-of-life][5]
+version of Python, we recommend that you update as soon as possible to an actively supported version.
+
+[5]: https://devguide.python.org/devcycle/#end-of-life-branches
