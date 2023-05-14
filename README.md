@@ -8,7 +8,8 @@
 4. Generating random samples and EDA.ipynb
 ### With experiment data
 1. First deploy the "server-appengine V3" on Google App Engine in order to generate participant data
-2. Run the Results.ipynb
+   OBS: before deploying to Google App Engine, use the terminal to direct to the folder and install the txt file using the following command: pip install -r      requirements.txt
+3. Run the Results.ipynb
 
 
 
